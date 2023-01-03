@@ -1,0 +1,31 @@
+for i in $(virsh list --all | awk '{print $2}' | grep -v Name); do virsh start $i; done
+
+for i in $(virsh list --all | awk '{print $2}' | grep -v Name); do virsh destroy $i; done
+
+
+virt-install --location \
+"http://download.opensuse.org/pub/opensuse/distribution/leap/15.2/repo/oss" \
+--name "test5" --memory 2048 --virt-type kvm \
+--connect qemu:///system --disk size=10 --network br0 \
+--extra-args="console=ttyS0 textmode=1" --graphics none
+
+
+for i in $(virsh list --all | awk '{print $2}' | grep -v Name); do virsh start $i; done
+
+for i in $(virsh list --all | awk '{print $2}' | grep -v Name); do virsh destroy $i; done
+
+
+
+Network setup::
+
+
+virsh net-update default add ip-dhcp-host "<host mac='52:54:00:db:b3:81' name='mbvm0' ip='192.168.122.10' />" --live --config
+virsh net-update default add ip-dhcp-host "<host mac='52:54:00:13:13:af' name='mbvm1' ip='192.168.122.11' />" --live --config
+virsh net-update default add ip-dhcp-host "<host mac='52:54:00:9f:a0:40' name='mbvm2' ip='192.168.122.12' />" --live --config
+virsh net-update default add ip-dhcp-host "<host mac='52:54:00:ab:70:c2' name='mbvm3' ip='192.168.122.13' />" --live --config
+virsh net-update default add ip-dhcp-host "<host mac='52:54:00:85:07:b8' name='mbvm4' ip='192.168.122.14' />" --live --config
+virsh net-update default add ip-dhcp-host "<host mac='52:54:00:4e:be:93' name='mbvm5' ip='192.168.122.15' />" --live --config
+virsh net-update default add ip-dhcp-host "<host mac='52:54:00:1c:b0:7b' name='mbvm6' ip='192.168.122.16' />" --live --config
+virsh net-update default add ip-dhcp-host "<host mac='52:54:00:92:71:96' name='mbvm7' ip='192.168.122.17' />" --live --config
+virsh net-update default add ip-dhcp-host "<host mac='52:54:00:f4:dc:07' name='mbvm8' ip='192.168.122.18' />" --live --config
+virsh net-update default add ip-dhcp-host "<host mac='52:54:00:a6:76:43' name='mbvm9' ip='192.168.122.19' />" --live --config
